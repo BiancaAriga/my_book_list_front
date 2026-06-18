@@ -1,0 +1,118 @@
+:root {
+    /* Cores principais */
+    --color-primary: #FF8243;
+    --color-secondary: #069494;
+    --color-accent: #FFC0CB;
+    --color-highlight: #FCE883;
+    --color-danger: #E05A5A;
+
+    /* Backgrounds */
+    --color-background: #FFF5F1;
+    --color-surface: #FFFFFF;
+
+    /* Textos */
+    --color-text-primary: #2D2D2D;
+    --color-text-secondary: #6B7280;
+    --color-text-on-primary: #FFFFFF;
+
+    /* Estados */
+    --color-reading: #FF8243;
+    --color-read: #069494;
+
+    /* Font Sizes */
+    --font-size-xs: 0.75rem;   /* 12px */
+    --font-size-sm: 0.875rem;  /* 14px */
+    --font-size-md: 1rem;      /* 16px */
+    --font-size-lg: 1.125rem;  /* 18px */
+    --font-size-xl: 1.5rem;    /* 24px */
+    --font-size-2xl: 2rem;     /* 32px */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-background);
+}
+
+.app {
+    min-height: 100vh;
+    margin: 2rem 3rem;
+}
+
+.button {
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 1rem;
+    padding: 0.6rem 1rem;
+    border: 0;
+    font-weight: 500;
+    font-size: var(--font-size-md);
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);  
+    text-decoration: none;  
+}
+
+.button--editar {
+    background-color: var(--color-secondary);
+}
+
+.button--remover {
+    background-color: var(--color-danger);
+}
+
+header {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text-primary);
+}
+
+header .header__title {
+    margin-bottom: 0.5rem;
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+}
+
+header .header__subtitle {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-md);
+}
+
+.livros__lista {
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.livros__item {
+    list-style: none;
+}
+
+.livro header .card-title {
+    font-size: var(--font-size-xl);
+}
+
+.livro__star--highlight {
+    color: var(--color-highlight);
+}
+
+.livro__categoria {
+    background-color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    padding: 0.4rem;
+    border-radius: 1rem;
+}
+
+.livro__datas {
+    font-size: var(--font-size-sm);
+}
