@@ -21,7 +21,61 @@
                 <h1 class="header__title">Minha Lista de Livros</h1>
                 <h2 class="header__subtitle">Organize e acompanhe suas leituras</h2>
             </div>
-            <button class="button">+ Adicionar Livro</button>
+            <button class="button" data-bs-toggle="modal" data-bs-target="#adicionarModal">+ Adicionar Livro</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="adicionarModal" tabindex="-1" aria-labelledby="adicionarModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content border-0 rounded-4">
+                        <div class="modal-header rounded-top-4">
+                            <h2 class="modal-title fs-5" id="adicionarModalLabel">Adicionar Novo Livro</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="livroForm">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nome" class="form-label">Título *</label>
+                                    <input type="text" class="form-control" id="nome" name="nome" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="autor" class="form-label">Autor *</label>
+                                    <input type="text" class="form-control" id="autor" name="autor" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoria" class="form-label">Gênero</label>
+                                    <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Ex: Ficção, Romance, Fantasia...">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="rating" class="form-label">Avaliação</label>
+                                    <input type="number" class="form-control" id="rating" name="rating" placeholder="Ex: 4.5" min="0" max="5" step="0.1">
+                                </div>
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select mb-3" aria-label="Select de Status de leitura" id="status" name="status">
+                                    <option value="Quero Ler" selected>Quero Ler</option>
+                                    <option value="Lendo">Lendo</option>
+                                    <option value="Finalizado">Finalizado</option>
+                                    <option value="Abandonado">Abandonado</option>
+                                </select>
+                                <div class="d-flex gap-3">
+                                    <div class="mb-3 w-50">
+                                        <label for="data_inicio" class="form-label">Data de Início</label>
+                                        <input type="date" class="form-control" id="data_inicio" name="data_inicio">
+                                    </div>
+                                    <div class="mb-3 w-50">
+                                        <label for="data_fim" class="form-label">Data de Fim</label>
+                                        <input type="date" class="form-control" id="data_fim" name="data_fim">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="button button--outline px-5" data-bs-dismiss="modal">Cancelar</button>
+                                <button class="button px-5" type="submit">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <section class="livros">

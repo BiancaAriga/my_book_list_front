@@ -1,5 +1,10 @@
 function criarCardLivro(livro) {
-    console.log(livro);
+    let categoriaHtml = "";
+    if (livro.categoria) {
+        categoriaHtml = `<p class="livro__categoria d-inline-block mb-2">${livro.categoria}</p>`;
+    } else {
+        categoriaHtml = `<p class="livro__categoria livro__categoria--vazio d-inline-block mb-2">&nbsp;</p>`;
+    }
     return `
         <li class="livros__item">
             <article class="card livro border-0 shadow-sm rounded-4">
@@ -12,15 +17,15 @@ function criarCardLivro(livro) {
                         <p class="mb-2">
                             ${criarEstrelas(livro.rating)}
                         </p>
-                        <p class="livro__categoria d-inline-block mb-2">${livro.categoria}</p>
+                        ${categoriaHtml}
                         <div class="livro__datas d-flex flex-column">
-                            <time datetime="${livro.data_inicio}">
+                            <time datetime="${livro.data_inicio ? livro.data_inicio : ''}">
                                 <i class="fa-regular fa-calendar"></i>
-                                Início: ${livro.data_inicio}
+                                Início: ${livro.data_inicio ? livro.data_inicio : ''}
                             </time>
-                            <time datetime="${livro.data_fim}">
+                            <time datetime="${livro.data_fim ? livro.data_fim : ''}">
                                 <i class="fa-regular fa-calendar"></i>
-                                Fim: ${livro.data_fim}
+                                Fim: ${livro.data_fim ? livro.data_fim : ''}
                             </time>
                         </div>
                     </section>
@@ -56,7 +61,7 @@ function renderizarLivros(livros) {
 
     const container = document.querySelector(".livros__lista");
 
-    //container.innerHTML = "";
+    container.innerHTML = "";
 
     livros.forEach((livro) => {
 

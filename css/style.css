@@ -52,7 +52,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     border-radius: 1rem;
     padding: 0.6rem 1rem;
-    border: 0;
+    border: 1px solid var(--color-primary);
     font-weight: 500;
     font-size: var(--font-size-md);
     background-color: var(--color-primary);
@@ -60,12 +60,20 @@ body {
     text-decoration: none;  
 }
 
+.button--outline {
+    background-color: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
 .button--editar {
     background-color: var(--color-secondary);
+    border: 1px solid var(--color-secondary);
 }
 
 .button--remover {
     background-color: var(--color-danger);
+    border: 1px solid var(--color-danger);
 }
 
 header {
@@ -85,6 +93,12 @@ header .header__title {
 header .header__subtitle {
     color: var(--color-text-secondary);
     font-size: var(--font-size-md);
+}
+
+#adicionarModal .modal-header {
+    background-color: var(--color-secondary);
+    color: var(--color-text-on-primary);
+    font-size: var(--font-size-lg);
 }
 
 .livros__lista {
@@ -111,6 +125,10 @@ header .header__subtitle {
     font-size: var(--font-size-xs);
     padding: 0.4rem;
     border-radius: 1rem;
+}
+
+.livro__categoria--vazio {
+    background-color: transparent;
 }
 
 .livro__datas {
