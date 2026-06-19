@@ -1,12 +1,17 @@
 const API_URL = "http://127.0.0.1:8000";
 
-async function buscarLivros() {
+async function buscarLivrosApi() {
     const response = await fetch(`${API_URL}/livros`);
+
+    if (!response.ok) {
+        throw new Error("Erro ao buscar livros");
+    }
+    
     return await response.json();
 }
 
 
-async function criarLivro(livro) {
+async function criarLivroApi(livro) {
     const response = await fetch(`${API_URL}/livros`, {
         method: "POST",
         headers: {
@@ -14,5 +19,20 @@ async function criarLivro(livro) {
         },
         body: JSON.stringify(livro)
     });
+
+    if (!response.ok) {
+        throw new Error("Erro ao criar livro");
+    }
+
     return await response.json();
+}
+
+async function removerLivroApi(id) {
+    const response = await fetch(`${API_URL}/livros/${id}`, {
+        method: "DELETE"
+    });
+
+    if (!response.ok) {
+        throw new Error("Erro ao remover livro");
+    }
 }
