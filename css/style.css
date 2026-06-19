@@ -118,6 +118,7 @@ header .header__subtitle {
 
 .livro__star--highlight {
     color: var(--color-highlight);
+    font-weight: 700;
 }
 
 .livro__categoria {
@@ -134,3 +135,12 @@ header .header__subtitle {
 .livro__datas {
     font-size: var(--font-size-sm);
 }
+
+label, legend {
+    font-size: var(--font-size-md);
+    color: var(--color-text-primary);
+}
+
+.rating_radios .form-check-label {
+    cursor: pointer;
+}   

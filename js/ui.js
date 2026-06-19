@@ -46,7 +46,7 @@ function criarEstrelas(rating) {
     for (let i = 1; i <= 5; i++) {
         if (i <= rating) {
             estrelas += `
-                <i class="fa-solid fa-star livro__star livro__star--highlight"></i>
+                <i class="fa-regular fa-star livro__star livro__star--highlight"></i>
             `;
         } else {
             estrelas += `
@@ -68,4 +68,31 @@ function renderizarLivros(livros) {
         container.innerHTML +=
             criarCardLivro(livro);
     });
+}
+
+const radios = document.querySelectorAll(
+    'input[name="rating"]'
+);
+
+radios.forEach((radio) => {
+    radio.addEventListener('change', () => {
+        atualizarEstrelas();
+    });
+});
+
+function atualizarEstrelas() {
+    const rating = Number(
+        document.querySelector(
+            'input[name="rating"]:checked'
+        )?.value || 0
+    );
+
+    document
+        .querySelectorAll(".rating_radios .livro__star")
+        .forEach((star, index) => {
+            star.classList.toggle(
+                "livro__star--highlight",
+                index < rating
+            );
+        });
 }

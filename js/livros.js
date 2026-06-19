@@ -33,6 +33,7 @@ async function cadastrarLivro(event) {
         const novoLivro = await criarLivroApi(livro);
 
         form.reset();
+        atualizarEstrelas();
 
         await carregarLivros();
 
