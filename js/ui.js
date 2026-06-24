@@ -30,7 +30,7 @@ function criarCardLivro(livro) {
                         </div>
                     </section>
                     <footer>
-                        <button class="button button--editar"><i class="fa-solid fa-pen me-2"></i>Editar</button>
+                        <button class="button button--editar" data-action="editar" data-id="${livro.id ?? ''}"><i class="fa-solid fa-pen me-2"></i>Editar</button>
                         <button class="button"><i class="fa-solid fa-book me-2"></i>Notas</button>
                         <button type="button" class="button button--remover livro__remover" data-action="remover" data-id="${livro.id ?? ''}" data-nome="${livro.nome ?? ''}"><i class="fa-solid fa-trash"></i></button>
                     </footer>
@@ -70,29 +70,25 @@ function renderizarLivros(livros) {
     });
 }
 
-const radios = document.querySelectorAll(
-    'input[name="rating"]'
-);
+document.addEventListener('change', (event) => {
+    const radio = event.target.closest('input[name="rating"]');
+    if (!radio) return;
 
-radios.forEach((radio) => {
-    radio.addEventListener('change', () => {
-        atualizarEstrelas();
-    });
+    const group = radio.closest('.rating_radios');
+    if (!group) return;
+
+    atualizarEstrelas(group);
 });
 
-function atualizarEstrelas() {
+
+function atualizarEstrelas(group) {
+    if (!group) return;
+
     const rating = Number(
-        document.querySelector(
-            'input[name="rating"]:checked'
-        )?.value || 0
+        group.querySelector('input[name="rating"]:checked')?.value || 0
     );
 
-    document
-        .querySelectorAll(".rating_radios .livro__star")
-        .forEach((star, index) => {
-            star.classList.toggle(
-                "livro__star--highlight",
-                index < rating
-            );
-        });
+    group.querySelectorAll('.livro__star').forEach((star, index) => {
+        star.classList.toggle('livro__star--highlight', index < rating);
+    });
 }

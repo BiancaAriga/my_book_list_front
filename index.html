@@ -29,7 +29,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content border-0 rounded-4">
                         <div class="modal-header rounded-top-4">
-                            <h2 class="modal-title fs-5" id="adicionarModalLabel">Adicionar Novo Livro</h2>
+                            <h2 class="modal-title fs-5" id="adicionarModalLabel">Adicionar Livro</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form id="livroFormAdicionar">
@@ -44,37 +44,44 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="categoria" class="form-label">Gênero</label>
-                                    <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Ex: Ficção, Romance, Fantasia...">
+                                    <input type="text" class="form-control" id="categoria" name="categoria"
+                                        placeholder="Ex: Ficção, Romance, Fantasia...">
                                 </div>
                                 <div class="mb-3">
                                     <fieldset class="rating_radios">
                                         <legend class="form-label">Avaliação</legend>
                                         <div class="d-flex gap-2">
-                                            <input class="form-check-input d-none" type="radio" name="rating" id="rating1" value="1">
-                                            <label class="form-check-label" for="rating1">
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="adicionar-rating1" value="1">
+                                            <label class="form-check-label" for="adicionar-rating1">
                                                 <i class="fa-regular fa-star livro__star"></i>
                                             </label>
-                                            <input class="form-check-input d-none" type="radio" name="rating" id="rating2" value="2">
-                                            <label class="form-check-label" for="rating2">
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="adicionar-rating2" value="2">
+                                            <label class="form-check-label" for="adicionar-rating2">
                                                 <i class="fa-regular fa-star livro__star"></i>
                                             </label>
-                                            <input class="form-check-input d-none" type="radio" name="rating" id="rating3" value="3">
-                                            <label class="form-check-label" for="rating3">
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="adicionar-rating3" value="3">
+                                            <label class="form-check-label" for="adicionar-rating3">
                                                 <i class="fa-regular fa-star livro__star"></i>
                                             </label>
-                                            <input class="form-check-input d-none" type="radio" name="rating" id="rating4" value="4">
-                                            <label class="form-check-label" for="rating4">
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="adicionar-rating4" value="4">
+                                            <label class="form-check-label" for="adicionar-rating4">
                                                 <i class="fa-regular fa-star livro__star"></i>
                                             </label>
-                                            <input class="form-check-input d-none" type="radio" name="rating" id="rating5" value="5">
-                                            <label class="form-check-label" for="rating5">
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="adicionar-rating5" value="5">
+                                            <label class="form-check-label" for="adicionar-rating5">
                                                 <i class="fa-regular fa-star livro__star"></i>
                                             </label>
                                         </div>
                                     </fieldset>
                                 </div>
                                 <label for="status" class="form-label">Status</label>
-                                <select class="form-select mb-3" aria-label="Select de Status de leitura" id="status" name="status">
+                                <select class="form-select mb-3" aria-label="Select de Status de leitura" id="status"
+                                    name="status">
                                     <option value="Quero Ler" selected>Quero Ler</option>
                                     <option value="Lendo">Lendo</option>
                                     <option value="Finalizado">Finalizado</option>
@@ -102,6 +109,90 @@
         </header>
 
         <section class="livros">
+            <!-- Modal Editar Livro -->
+            <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content border-0 rounded-4">
+                        <div class="modal-header rounded-top-4">
+                            <h2 class="modal-title fs-5" id="editarModalLabel">Editar Livro</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="livroFormEditar">
+                            <input type="hidden" class="form-control" id="id" name="id" required>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nome" class="form-label">Título *</label>
+                                    <input type="text" class="form-control" id="nome" name="nome" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="autor" class="form-label">Autor *</label>
+                                    <input type="text" class="form-control" id="autor" name="autor" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoria" class="form-label">Gênero</label>
+                                    <input type="text" class="form-control" id="categoria" name="categoria"
+                                        placeholder="Ex: Ficção, Romance, Fantasia...">
+                                </div>
+                                <div class="mb-3">
+                                    <fieldset class="rating_radios">
+                                        <legend class="form-label">Avaliação</legend>
+                                        <div class="d-flex gap-2">
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="editar-rating1" value="1">
+                                            <label class="form-check-label" for="editar-rating1">
+                                                <i class="fa-regular fa-star livro__star"></i>
+                                            </label>
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="editar-rating2" value="2">
+                                            <label class="form-check-label" for="editar-rating2">
+                                                <i class="fa-regular fa-star livro__star"></i>
+                                            </label>
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="editar-rating3" value="3">
+                                            <label class="form-check-label" for="editar-rating3">
+                                                <i class="fa-regular fa-star livro__star"></i>
+                                            </label>
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="editar-rating4" value="4">
+                                            <label class="form-check-label" for="editar-rating4">
+                                                <i class="fa-regular fa-star livro__star"></i>
+                                            </label>
+                                            <input class="form-check-input d-none" type="radio" name="rating"
+                                                id="editar-rating5" value="5">
+                                            <label class="form-check-label" for="editar-rating5">
+                                                <i class="fa-regular fa-star livro__star"></i>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select mb-3" aria-label="Select de Status de leitura" id="status"
+                                    name="status">
+                                    <option value="Quero Ler" selected>Quero Ler</option>
+                                    <option value="Lendo">Lendo</option>
+                                    <option value="Finalizado">Finalizado</option>
+                                    <option value="Abandonado">Abandonado</option>
+                                </select>
+                                <div class="d-flex gap-3">
+                                    <div class="mb-3 w-50">
+                                        <label for="data_inicio" class="form-label">Data de Início</label>
+                                        <input type="date" class="form-control" id="data_inicio" name="data_inicio">
+                                    </div>
+                                    <div class="mb-3 w-50">
+                                        <label for="data_fim" class="form-label">Data de Fim</label>
+                                        <input type="date" class="form-control" id="data_fim" name="data_fim">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="button button--outline px-5" data-bs-dismiss="modal">Cancelar</button>
+                                <button class="button px-5" type="submit">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <ul class="livros__lista">
             </ul>
         </section>

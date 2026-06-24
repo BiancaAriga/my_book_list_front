@@ -1,11 +1,14 @@
+let livros = [];
+
 async function carregarLivros() {
     try {
-        const livros = await buscarLivrosApi();
+        livros = await buscarLivrosApi();
         renderizarLivros(livros);
     } catch (error) {
         console.error(error);
     }
 }
+
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -33,7 +36,7 @@ async function cadastrarLivro(event) {
         const novoLivro = await criarLivroApi(livro);
 
         form.reset();
-        atualizarEstrelas();
+        atualizarEstrelas(form);
 
         await carregarLivros();
 
@@ -46,23 +49,71 @@ async function cadastrarLivro(event) {
     }
 }
 
+const formEditar = document.getElementById("editarModalLabel");
+
+formEditar.addEventListener(
+    "submit",
+    editarLivro
+);
+
+/*async function editarLivro(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const livro = { ...Object.fromEntries(formData),
+        rating: Number(formData.get("rating")) || null,
+        data_inicio: formData.get("data_inicio") || null,
+        data_fim: formData.get("data_fim") || null,
+        categoria: formData.get("categoria") || null
+    };
+    
+    try {
+        const novoLivro = await criarLivroApi(livro);
+
+        form.reset();
+        atualizarEstrelas(form);
+
+        await carregarLivros();
+
+        const modalElement = document.getElementById("adicionarModal");
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        modal.hide();
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+*/
 const livrosLista = document.querySelector(".livros__lista");
 
 livrosLista.addEventListener("click", (event) => {
-    const removerButton = event.target.closest("[data-action='remover']");
-    if (!removerButton) return;
+    
+    const button = event.target.closest("[data-action]");
+    if (!button) return;
 
     event.preventDefault();
-    const livroId = removerButton.dataset.id;
-    const livroNome = removerButton.dataset.nome;
 
-    const confirmou = confirm(
-        `Deseja realmente remover o livro ${livroNome}?`
-    );
+    const { action, id } = button.dataset;
 
-    if (!confirmou) return;
+    switch (action) {
+        case "remover": {
+            const confirmou = confirm(
+                `Deseja realmente remover o livro ${button.dataset.nome}?`
+            );
 
-    removerLivro(livroId);
+            if (!confirmou) return;
+
+            removerLivro(id);
+            break;
+        }
+
+        case "editar":
+            abrirModalEdicao(id);
+            break;
+
+        case "notas":
+            abrirNotas(id);
+            break;
+    }
 });
 
 async function removerLivro(id) {
@@ -72,4 +123,36 @@ async function removerLivro(id) {
     } catch (error) {
         console.error(error);
     }
+}
+
+function abrirModalEdicao(id) {
+    const livro = livros.find(
+        livro => livro.id === Number(id)
+    );
+
+    if (!livro) return;
+
+    const formEditar = document.getElementById("livroFormEditar");
+
+    formEditar.querySelectorAll('input[name="rating"]').forEach((radio) => {
+        radio.checked = false;
+    });
+
+    const radioSelecionado = formEditar.querySelector(`input[name="rating"][value="${livro.rating}"]`);
+    if (radioSelecionado) {
+        radioSelecionado.checked = true;
+    }
+
+    document.querySelector("#editarModal #nome").value = livro.nome;
+    document.querySelector("#editarModal #autor").value = livro.autor;
+    document.querySelector("#editarModal #categoria").value = livro.categoria;
+    document.querySelector("#editarModal #data_inicio").value = livro.data_inicio;
+    document.querySelector("#editarModal #data_fim").value = livro.data_fim;
+    document.querySelector("#editarModal #id").value = livro.id;
+
+    atualizarEstrelas(formEditar);
+
+    const modalElement = document.getElementById("editarModal");
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
 }

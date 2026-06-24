@@ -36,3 +36,19 @@ async function removerLivroApi(id) {
         throw new Error("Erro ao remover livro");
     }
 }
+
+async function editarLivroApi(id, livro) {
+    const response = await fetch(`${API_URL}/livros/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(livro)
+    });
+
+    if (!response.ok) {
+        throw new Error("Erro ao criar livro");
+    }
+
+    return await response.json();
+}

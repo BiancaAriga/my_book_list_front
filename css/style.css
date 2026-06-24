@@ -95,7 +95,8 @@ header .header__subtitle {
     font-size: var(--font-size-md);
 }
 
-#adicionarModal .modal-header {
+#adicionarModal .modal-header,
+#editarModal .modal-header {
     background-color: var(--color-secondary);
     color: var(--color-text-on-primary);
     font-size: var(--font-size-lg);
