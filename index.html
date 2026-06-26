@@ -108,6 +108,40 @@
             </div>
         </header>
 
+        <section class="livros-filtros">
+            <nav class="navbar navbar-expand-lg mb-3">
+                <div class="container-fluid p-0">
+                    <ul class="navbar-nav livros-filtros__lista">
+                        <li class="nav-item livros-filtros__item">
+                            <button class="nav-link livros-filtros__link active d-flex align-items-center" data-status="">
+                                <i class="fa-solid fa-book me-2"></i>Todos os Livros
+                            </button>
+                        </li>
+                        <li class="nav-item livros-filtros__item">
+                            <button class="nav-link livros-filtros__link d-flex align-items-center" data-status="Quero Ler">
+                                <i class="fa-solid fa-bookmark me-2"></i>Quero Ler
+                            </button>
+                        </li>
+                        <li class="nav-item livros-filtros__item">
+                            <button class="nav-link livros-filtros__link d-flex align-items-center" data-status="Lendo">
+                                <i class="fa-solid fa-book-open me-2"></i>Lendo
+                            </button>
+                        </li>
+                        <li class="nav-item livros-filtros__item">
+                            <button class="nav-link livros-filtros__link d-flex align-items-center" data-status="Finalizado">
+                                <i class="fa-solid fa-circle-check me-2"></i>Finalizado
+                            </button>
+                        </li>
+                        <li class="nav-item livros-filtros__item">
+                            <button class="nav-link livros-filtros__link d-flex align-items-center" data-status="Abandonado">
+                                <i class="fa-solid fa-ban me-2"></i>Abandonado
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </section>
+
         <section class="livros">
             <!-- Modal Editar Livro -->
             <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel"

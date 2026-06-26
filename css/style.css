@@ -102,6 +102,15 @@ header .header__subtitle {
     font-size: var(--font-size-lg);
 }
 
+
+.livros-filtros__item:has(.livros-filtros__link.active) {
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.livros-filtros__item .livros-filtros__link.active {
+    color: var(--color-primary);
+}
+
 .livros__lista {
     padding: 0;
     display: grid;

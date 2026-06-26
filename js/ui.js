@@ -92,3 +92,19 @@ function atualizarEstrelas(group) {
         star.classList.toggle('livro__star--highlight', index < rating);
     });
 }
+
+const tabs = document.querySelectorAll(".nav-link[data-status]");
+tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+
+        tabs.forEach(t =>
+            t.classList.remove("active")
+        );
+
+        tab.classList.add("active");
+
+        console.log(tab.dataset.status
+            
+        )
+    });
+});
