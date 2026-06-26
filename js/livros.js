@@ -49,14 +49,14 @@ async function cadastrarLivro(event) {
     }
 }
 
-const formEditar = document.getElementById("editarModalLabel");
+const formEditar = document.getElementById("livroFormEditar");
 
 formEditar.addEventListener(
     "submit",
     editarLivro
 );
 
-/*async function editarLivro(event) {
+async function editarLivro(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const livro = { ...Object.fromEntries(formData),
@@ -67,14 +67,14 @@ formEditar.addEventListener(
     };
     
     try {
-        const novoLivro = await criarLivroApi(livro);
+        const novoLivro = await editarLivroApi(livro.id, livro);
 
-        form.reset();
-        atualizarEstrelas(form);
+        formEditar.reset();
+        atualizarEstrelas(formEditar);
 
         await carregarLivros();
 
-        const modalElement = document.getElementById("adicionarModal");
+        const modalElement = document.getElementById("editarModal");
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
 
@@ -82,7 +82,7 @@ formEditar.addEventListener(
         console.error(error);
     }
 }
-*/
+
 const livrosLista = document.querySelector(".livros__lista");
 
 livrosLista.addEventListener("click", (event) => {
@@ -146,6 +146,7 @@ function abrirModalEdicao(id) {
     document.querySelector("#editarModal #nome").value = livro.nome;
     document.querySelector("#editarModal #autor").value = livro.autor;
     document.querySelector("#editarModal #categoria").value = livro.categoria;
+    document.querySelector("#editarModal #status").value = livro.status;
     document.querySelector("#editarModal #data_inicio").value = livro.data_inicio;
     document.querySelector("#editarModal #data_fim").value = livro.data_fim;
     document.querySelector("#editarModal #id").value = livro.id;
