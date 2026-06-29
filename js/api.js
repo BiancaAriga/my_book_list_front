@@ -1,8 +1,12 @@
 const API_URL = "http://127.0.0.1:8000";
 
-async function buscarLivrosApi() {
-    const response = await fetch(`${API_URL}/livros`);
-
+async function buscarLivrosApi(status) {
+    let response;
+    if (status) {
+        response = await fetch(`${API_URL}/livros?status=${status}`);
+    } else {
+        response = await fetch(`${API_URL}/livros`);
+    }
     if (!response.ok) {
         throw new Error("Erro ao buscar livros");
     }

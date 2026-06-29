@@ -1,8 +1,8 @@
 let livros = [];
 
-async function carregarLivros() {
+async function carregarLivros(status) {
     try {
-        livros = await buscarLivrosApi();
+        livros = await buscarLivrosApi(status);
         renderizarLivros(livros);
     } catch (error) {
         console.error(error);
@@ -12,7 +12,7 @@ async function carregarLivros() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    carregarLivros
+    carregarLivros(status = null)
 );
 
 const form = document.getElementById("livroFormAdicionar");

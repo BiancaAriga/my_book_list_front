@@ -103,8 +103,6 @@ tabs.forEach(tab => {
 
         tab.classList.add("active");
 
-        console.log(tab.dataset.status
-            
-        )
+        carregarLivros(tab.dataset.status)
     });
 });
