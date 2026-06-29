@@ -1,4 +1,5 @@
 let livros = [];
+let statusEdicaoAnterior = null;
 
 async function carregarLivros(status) {
     try {
@@ -72,7 +73,7 @@ async function editarLivro(event) {
         formEditar.reset();
         atualizarEstrelas(formEditar);
 
-        await carregarLivros();
+        await carregarLivros(statusEdicaoAnterior);
 
         const modalElement = document.getElementById("editarModal");
         const modal = bootstrap.Modal.getInstance(modalElement);
@@ -151,6 +152,7 @@ function abrirModalEdicao(id) {
     document.querySelector("#editarModal #data_fim").value = livro.data_fim;
     document.querySelector("#editarModal #id").value = livro.id;
 
+    statusEdicaoAnterior = livro.status;
     atualizarEstrelas(formEditar);
 
     const modalElement = document.getElementById("editarModal");
