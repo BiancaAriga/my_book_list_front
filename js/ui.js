@@ -21,11 +21,11 @@ function criarCardLivro(livro) {
                         <div class="livro__datas d-flex flex-column">
                             <time datetime="${livro.data_inicio ? livro.data_inicio : ''}">
                                 <i class="fa-regular fa-calendar"></i>
-                                Início: ${livro.data_inicio ? livro.data_inicio : ''}
+                                Início: ${formatarData(livro.data_inicio)}
                             </time>
                             <time datetime="${livro.data_fim ? livro.data_fim : ''}">
                                 <i class="fa-regular fa-calendar"></i>
-                                Fim: ${livro.data_fim ? livro.data_fim : ''}
+                                Fim: ${formatarData(livro.data_fim)}
                             </time>
                         </div>
                     </section>
