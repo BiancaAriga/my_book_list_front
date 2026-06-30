@@ -58,7 +58,7 @@ async function editarLivroApi(id, livro) {
 }
 
 async function buscarTrechosApi(livro_id) {
-    const response = await fetch(`${API_URL}/trechos/${livro_id}`);
+    const response = await fetch(`${API_URL}/livros/${livro_id}/trechos`);
     
     if (!response.ok) {
         throw new Error("Erro ao buscar trechos");
@@ -68,7 +68,7 @@ async function buscarTrechosApi(livro_id) {
 }
 
 async function criarTrechoApi(livro_id, trecho) {
-    const response = await fetch(`${API_URL}/trechos/${livro_id}`, {
+    const response = await fetch(`${API_URL}/livros/${livro_id}/trechos`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -81,4 +81,14 @@ async function criarTrechoApi(livro_id, trecho) {
     }
 
     return await response.json();
+}
+
+async function removerTrechoApi(trecho_id) {
+    const response = await fetch(`${API_URL}/trechos/${trecho_id}`, {
+        method: "DELETE"
+    });
+
+    if (!response.ok) {
+        throw new Error("Erro ao remover trecho");
+    }
 }

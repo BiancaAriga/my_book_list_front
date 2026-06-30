@@ -102,7 +102,6 @@ header .header__subtitle {
     font-size: var(--font-size-lg);
 }
 
-
 .livros-filtros__item:has(.livros-filtros__link.active) {
     border-bottom: 2px solid var(--color-primary);
 }
@@ -118,7 +117,7 @@ header .header__subtitle {
     gap: 1.5rem;
 }
 
-.livros__item {
+.livros__item, .trechos__lista {
     list-style: none;
 }
 
@@ -153,4 +152,42 @@ label, legend {
 
 .rating_radios .form-check-label {
     cursor: pointer;
-}   
+} 
+
+#trechoModal .modal-header {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    font-size: var(--font-size-lg);
+}
+
+#trechoModal .trechos__item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--color-background);
+    border-radius: 1.2rem;
+}
+
+#trechoModal .modal-dialog {
+    max-height: calc(100vh - 2rem);
+}
+
+#trechoModal .modal-content {
+    max-height: calc(100vh - 2rem);
+}
+
+#trechoModal form {
+    display: flex;
+    flex-direction: column;
+}
+
+#trechoModal .trechos {
+    max-height: min(50vh, 420px);
+    overflow-y: auto;
+}
+
+#trechoModal .trechos__botao--remover {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}

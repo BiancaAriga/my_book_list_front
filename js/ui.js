@@ -106,3 +106,29 @@ tabs.forEach(tab => {
         carregarLivros(tab.dataset.status)
     });
 });
+
+function renderizarTrechos(trechos) {
+    const trechosLista = document.querySelector(".trechos__lista");
+    trechosLista.innerHTML = "";
+
+    trechos.forEach((trecho) => {
+        const li = document.createElement("li");
+        li.classList.add("trechos__item");
+        li.innerHTML = `
+            <div class="d-flex align-items-start justify-content-between gap-2">
+                <span class="trechos__texto">${trecho.texto}</span>
+
+                <button
+                    type="button"
+                    class="trechos__botao--remover"
+                    data-id="${trecho.id}"
+                    aria-label="Remover trecho"
+                >
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        `;
+        trechosLista.appendChild(li);
+    });
+    
+}

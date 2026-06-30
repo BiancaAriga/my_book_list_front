@@ -236,17 +236,14 @@
                             <h2 class="modal-title fs-5" id="trechoModalLabel">Trechos do Livro</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <section class="trechos">
-                            <ul class="trechos__lista">
+                        <section class="trechos mt-3">
+                            <ul class="trechos__lista mb-0 ps-0 mx-3">
                             </ul>
                         </section>
                         <form id="livroFormTrecho">
                             <input type="hidden" class="form-control" id="livro_id" name="livro_id" required>
                             <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="texto" class="form-label">Texto *</label>
-                                    <input type="text" class="form-control" id="texto" name="texto" required>
-                                </div>
+                                <textarea class="form-control mb-3" id="texto" name="texto" rows="3" placeholder="Registre suas impressões, páginas marcantes, citações e reflexões conforme avança na leitura." required></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button class="button button--outline px-5" data-bs-dismiss="modal">Cancelar</button>

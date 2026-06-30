@@ -105,8 +105,11 @@ async function adicionarTrecho(event) {
     const trecho = { ...Object.fromEntries(formData) };
 
     try {
-        const novoTrecho = await criarTrechoApi(trecho.livro_id, trecho);
+        await criarTrechoApi(trecho.livro_id, trecho);
         formTrecho.reset();
+
+        const trechosAtualizados = await carregarTrechos(trecho.livro_id);
+        renderizarTrechos(trechosAtualizados || []);
     } catch (error) {
         console.error(error);
     }
@@ -146,14 +149,46 @@ livrosLista.addEventListener("click", (event) => {
     }
 });
 
+const trechosLista = document.querySelector(".trechos__lista");
+
+trechosLista.addEventListener("click", (event) => {
+    const button = event.target.closest(".trechos__botao--remover");
+
+    if (!button) return;
+
+    event.preventDefault();
+
+    const trechoId = button.dataset.id;
+    
+    const livroId = document.querySelector("#trechoModal #livro_id")?.value;
+
+    if (!trechoId || !livroId) return;
+
+    removerTrecho(livroId, trechoId);
+});
+
 async function removerLivro(id) {
     const livro = carregarLivro(id);
 
     if (!livro) return;
-    console.log(livro.status)
+    
     try {
         await removerLivroApi(id);
         await carregarLivros(livro.status);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function removerTrecho(livroId, trechoId) {
+    const confirmou = confirm("Deseja realmente remover este trecho?");
+
+    if (!confirmou) return;
+
+    try {
+        await removerTrechoApi(trechoId);
+        const trechosAtualizados = await carregarTrechos(livroId);
+        renderizarTrechos(trechosAtualizados || []);
     } catch (error) {
         console.error(error);
     }
@@ -211,14 +246,7 @@ async function abrirModalTrecho(id) {
 
     const trechos = await carregarTrechos(livro.id);
 
-    const trechosLista = document.querySelector(".trechos__lista");
-    trechosLista.innerHTML = "";
-
-    trechos.forEach((trecho) => {
-        const li = document.createElement("li");
-        li.textContent = trecho.texto;
-        trechosLista.appendChild(li);
-    });
+    renderizarTrechos(trechos)
 
     const modalElement = document.getElementById("trechoModal");
     const modal = new bootstrap.Modal(modalElement);
