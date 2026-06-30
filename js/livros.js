@@ -10,6 +10,13 @@ async function carregarLivros(status) {
     }
 }
 
+function carregarLivro(id) {
+    const livro = livros.find(
+        livro => livro.id === Number(id)
+    );
+    return livro;
+}
+
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -140,18 +147,20 @@ livrosLista.addEventListener("click", (event) => {
 });
 
 async function removerLivro(id) {
+    const livro = carregarLivro(id);
+
+    if (!livro) return;
+    console.log(livro.status)
     try {
         await removerLivroApi(id);
-        await carregarLivros();
+        await carregarLivros(livro.status);
     } catch (error) {
         console.error(error);
     }
 }
 
 function abrirModalEdicao(id) {
-    const livro = livros.find(
-        livro => livro.id === Number(id)
-    );
+    const livro = carregarLivro(id);
 
     if (!livro) return;
 
@@ -182,7 +191,16 @@ function abrirModalEdicao(id) {
     modal.show();
 }
 
-function abrirModalTrecho(id) {
+async function carregarTrechos(livro_id) {
+    try {
+        trechos = await buscarTrechosApi(livro_id);
+        return trechos;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function abrirModalTrecho(id) {
     const livro = livros.find(
         livro => livro.id === Number(id)
     );
@@ -190,6 +208,17 @@ function abrirModalTrecho(id) {
     if (!livro) return;
     
     document.querySelector("#trechoModal #livro_id").value = livro.id;
+
+    const trechos = await carregarTrechos(livro.id);
+
+    const trechosLista = document.querySelector(".trechos__lista");
+    trechosLista.innerHTML = "";
+
+    trechos.forEach((trecho) => {
+        const li = document.createElement("li");
+        li.textContent = trecho.texto;
+        trechosLista.appendChild(li);
+    });
 
     const modalElement = document.getElementById("trechoModal");
     const modal = new bootstrap.Modal(modalElement);

@@ -57,6 +57,16 @@ async function editarLivroApi(id, livro) {
     return await response.json();
 }
 
+async function buscarTrechosApi(livro_id) {
+    const response = await fetch(`${API_URL}/trechos/${livro_id}`);
+    
+    if (!response.ok) {
+        throw new Error("Erro ao buscar trechos");
+    }
+    
+    return await response.json();
+}
+
 async function criarTrechoApi(livro_id, trecho) {
     const response = await fetch(`${API_URL}/trechos/${livro_id}`, {
         method: "POST",
