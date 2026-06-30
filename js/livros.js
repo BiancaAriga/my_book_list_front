@@ -84,6 +84,28 @@ async function editarLivro(event) {
     }
 }
 
+
+const formTrecho = document.getElementById("livroFormTrecho");
+
+formTrecho.addEventListener(
+    "submit",
+    adicionarTrecho
+);
+
+async function adicionarTrecho(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const trecho = { ...Object.fromEntries(formData) };
+
+    try {
+        const novoTrecho = await criarTrechoApi(trecho.livro_id, trecho);
+        formTrecho.reset();
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 const livrosLista = document.querySelector(".livros__lista");
 
 livrosLista.addEventListener("click", (event) => {
@@ -111,8 +133,8 @@ livrosLista.addEventListener("click", (event) => {
             abrirModalEdicao(id);
             break;
 
-        case "notas":
-            abrirNotas(id);
+        case "trecho":
+            abrirModalTrecho(id);
             break;
     }
 });
@@ -156,6 +178,20 @@ function abrirModalEdicao(id) {
     atualizarEstrelas(formEditar);
 
     const modalElement = document.getElementById("editarModal");
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
+}
+
+function abrirModalTrecho(id) {
+    const livro = livros.find(
+        livro => livro.id === Number(id)
+    );
+
+    if (!livro) return;
+    
+    document.querySelector("#trechoModal #livro_id").value = livro.id;
+
+    const modalElement = document.getElementById("trechoModal");
     const modal = new bootstrap.Modal(modalElement);
     modal.show();
 }

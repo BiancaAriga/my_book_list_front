@@ -51,7 +51,23 @@ async function editarLivroApi(id, livro) {
     });
 
     if (!response.ok) {
-        throw new Error("Erro ao criar livro");
+        throw new Error("Erro ao editar livro");
+    }
+
+    return await response.json();
+}
+
+async function criarTrechoApi(livro_id, trecho) {
+    const response = await fetch(`${API_URL}/trechos/${livro_id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(trecho)
+    });
+
+    if (!response.ok) {
+        throw new Error("Erro ao criar trecho");
     }
 
     return await response.json();

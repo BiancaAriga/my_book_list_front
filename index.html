@@ -227,6 +227,31 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal Trecho Livro -->
+            <div class="modal fade" id="trechoModal" tabindex="-1" aria-labelledby="trechoModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content border-0 rounded-4">
+                        <div class="modal-header rounded-top-4">
+                            <h2 class="modal-title fs-5" id="trechoModalLabel">Trechos do Livro</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="livroFormTrecho">
+                            <input type="hidden" class="form-control" id="livro_id" name="livro_id" required>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="texto" class="form-label">Texto *</label>
+                                    <input type="text" class="form-control" id="texto" name="texto" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="button button--outline px-5" data-bs-dismiss="modal">Cancelar</button>
+                                <button class="button px-5" type="submit">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <ul class="livros__lista">
             </ul>
         </section>

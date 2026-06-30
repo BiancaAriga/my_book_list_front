@@ -31,7 +31,7 @@ function criarCardLivro(livro) {
                     </section>
                     <footer>
                         <button class="button button--editar" data-action="editar" data-id="${livro.id ?? ''}"><i class="fa-solid fa-pen me-2"></i>Editar</button>
-                        <button class="button"><i class="fa-solid fa-book me-2"></i>Notas</button>
+                        <button class="button button--trecho" data-action="trecho" data-id="${livro.id ?? ''}"><i class="fa-solid fa-book me-2"></i>Trechos</button>
                         <button type="button" class="button button--remover livro__remover" data-action="remover" data-id="${livro.id ?? ''}" data-nome="${livro.nome ?? ''}"><i class="fa-solid fa-trash"></i></button>
                     </footer>
                 </div>
