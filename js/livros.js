@@ -1,7 +1,24 @@
-let livros = [];
-let statusEdicaoAnterior = null;
+import {
+    buscarLivrosApi,
+    criarLivroApi,
+    removerLivroApi,
+    editarLivroApi,
+    buscarTrechosApi,
+    criarTrechoApi,
+    removerTrechoApi
+} from "./api.js";
 
-async function carregarLivros(status) {
+import {
+    renderizarLivros,
+    atualizarEstrelas,
+    renderizarTrechos
+} from "./ui.js";
+
+import { getStatus } from "./status.js";
+
+let livros = [];
+
+export async function carregarLivros(status) {
     try {
         livros = await buscarLivrosApi(status);
         renderizarLivros(livros);
@@ -83,8 +100,7 @@ async function editarLivro(event) {
 
         formEditar.reset();
         atualizarEstrelas(formEditar);
-
-        await carregarLivros(statusEdicaoAnterior);
+        await carregarLivros(getStatus());
 
         const modalElement = document.getElementById("editarModal");
         const modal = bootstrap.Modal.getInstance(modalElement);
@@ -201,7 +217,7 @@ async function removerLivro(id) {
     
     try {
         await removerLivroApi(id);
-        await carregarLivros(livro.status);
+        await carregarLivros(getStatus());
     } catch (error) {
         console.error(error);
     }
@@ -245,7 +261,6 @@ function abrirModalEdicao(id) {
     document.querySelector("#editarModal #data_fim").value = livro.data_fim;
     document.querySelector("#editarModal #id").value = livro.id;
 
-    statusEdicaoAnterior = livro.status;
     atualizarEstrelas(formEditar);
 
     const modalElement = document.getElementById("editarModal");
@@ -255,7 +270,7 @@ function abrirModalEdicao(id) {
 
 async function carregarTrechos(livro_id) {
     try {
-        trechos = await buscarTrechosApi(livro_id);
+        const trechos = await buscarTrechosApi(livro_id);
         return trechos;
     } catch (error) {
         console.error(error);

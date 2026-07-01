@@ -1,6 +1,6 @@
 const API_URL = "http://127.0.0.1:8000";
 
-async function buscarLivrosApi(status) {
+export async function buscarLivrosApi(status) {
     let response;
     if (status) {
         response = await fetch(`${API_URL}/livros?status=${status}`);
@@ -15,7 +15,7 @@ async function buscarLivrosApi(status) {
 }
 
 
-async function criarLivroApi(livro) {
+export async function criarLivroApi(livro) {
     const response = await fetch(`${API_URL}/livros`, {
         method: "POST",
         headers: {
@@ -31,7 +31,7 @@ async function criarLivroApi(livro) {
     return await response.json();
 }
 
-async function removerLivroApi(id) {
+export async function removerLivroApi(id) {
     const response = await fetch(`${API_URL}/livros/${id}`, {
         method: "DELETE"
     });
@@ -41,7 +41,7 @@ async function removerLivroApi(id) {
     }
 }
 
-async function editarLivroApi(id, livro) {
+export async function editarLivroApi(id, livro) {
     const response = await fetch(`${API_URL}/livros/${id}`, {
         method: "PUT",
         headers: {
@@ -57,7 +57,7 @@ async function editarLivroApi(id, livro) {
     return await response.json();
 }
 
-async function buscarTrechosApi(livro_id) {
+export async function buscarTrechosApi(livro_id) {
     const response = await fetch(`${API_URL}/livros/${livro_id}/trechos`);
     
     if (!response.ok) {
@@ -67,7 +67,7 @@ async function buscarTrechosApi(livro_id) {
     return await response.json();
 }
 
-async function criarTrechoApi(livro_id, trecho) {
+export async function criarTrechoApi(livro_id, trecho) {
     const response = await fetch(`${API_URL}/livros/${livro_id}/trechos`, {
         method: "POST",
         headers: {
@@ -83,7 +83,7 @@ async function criarTrechoApi(livro_id, trecho) {
     return await response.json();
 }
 
-async function removerTrechoApi(trecho_id) {
+export async function removerTrechoApi(trecho_id) {
     const response = await fetch(`${API_URL}/trechos/${trecho_id}`, {
         method: "DELETE"
     });

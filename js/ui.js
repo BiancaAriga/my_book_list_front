@@ -1,3 +1,7 @@
+import { getStatus, setStatus } from "./status.js";
+import { formatarData } from "./utils.js";
+import { carregarLivros } from "./livros.js";
+
 function criarCardLivro(livro) {
     let categoriaHtml = "";
     if (livro.categoria) {
@@ -61,7 +65,7 @@ function criarEstrelas(rating) {
     return estrelas;
 }
 
-function renderizarLivros(livros) {
+export function renderizarLivros(livros) {
 
     const container = document.querySelector(".livros__lista");
 
@@ -85,7 +89,7 @@ document.addEventListener('change', (event) => {
 });
 
 
-function atualizarEstrelas(group) {
+export function atualizarEstrelas(group) {
     if (!group) return;
 
     const rating = Number(
@@ -106,12 +110,12 @@ tabs.forEach(tab => {
         );
 
         tab.classList.add("active");
-
+        setStatus(tab.dataset.status);
         carregarLivros(tab.dataset.status)
     });
 });
 
-function renderizarTrechos(trechos) {
+export function renderizarTrechos(trechos) {
     const trechosLista = document.querySelector(".trechos__lista");
     trechosLista.innerHTML = "";
 
