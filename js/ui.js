@@ -5,11 +5,15 @@ function criarCardLivro(livro) {
     } else {
         categoriaHtml = `<p class="livro__categoria livro__categoria--vazio d-inline-block mb-2">&nbsp;</p>`;
     }
+    const imagem = livro.imagem_url ? livro.imagem_url : "../assets/images/capa-padrao.png";
     return `
         <li class="livros__item">
             <article class="card livro border-0 shadow-sm rounded-4">
                 <div class="card-body">
                     <header class="d-flex flex-column align-items-start mb-2">
+                        <div class="livro__imagem">
+                            <img src="${imagem}" class="w-100 m-auto" alt="Capa do livro ${livro.nome}">
+                        </div>
                         <h3 class="card-title fw-bold mb-1">${livro.nome}</h3>
                         <p class="card-text">por ${livro.autor}</p>
                     </header>

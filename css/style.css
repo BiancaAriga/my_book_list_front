@@ -121,6 +121,14 @@ header .header__subtitle {
     list-style: none;
 }
 
+.livro header .livro__imagem {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
 .livro header .card-title {
     font-size: var(--font-size-xl);
 }
