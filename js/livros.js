@@ -41,6 +41,7 @@ async function cadastrarLivro(event) {
     };
     
     try {
+        setSubmitLoading(form, true);
         const novoLivro = await criarLivroApi(livro);
 
         form.reset();
@@ -54,6 +55,8 @@ async function cadastrarLivro(event) {
 
     } catch (error) {
         console.error(error);
+    } finally {
+        setSubmitLoading(form, false);
     }
 }
 
@@ -75,6 +78,7 @@ async function editarLivro(event) {
     };
     
     try {
+        setSubmitLoading(formEditar, true);
         const novoLivro = await editarLivroApi(livro.id, livro);
 
         formEditar.reset();
@@ -88,11 +92,31 @@ async function editarLivro(event) {
 
     } catch (error) {
         console.error(error);
+    } finally {
+        setSubmitLoading(formEditar, false);
     }
 }
 
 
 const formTrecho = document.getElementById("livroFormTrecho");
+
+function setSubmitLoading(form, isLoading) {
+    if (!form) return;
+    const btn = form.querySelector('[type="submit"]');
+    if (!btn) return;
+
+    if (isLoading) {
+        btn.disabled = true;
+        if (!btn.dataset.originalHtml) btn.dataset.originalHtml = btn.innerHTML;
+        btn.innerHTML = '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>';
+    } else {
+        btn.disabled = false;
+        if (btn.dataset.originalHtml) {
+            btn.innerHTML = btn.dataset.originalHtml;
+            delete btn.dataset.originalHtml;
+        }
+    }
+}
 
 formTrecho.addEventListener(
     "submit",
@@ -105,6 +129,7 @@ async function adicionarTrecho(event) {
     const trecho = { ...Object.fromEntries(formData) };
 
     try {
+        setSubmitLoading(formTrecho, true);
         await criarTrechoApi(trecho.livro_id, trecho);
         formTrecho.reset();
 
@@ -112,6 +137,8 @@ async function adicionarTrecho(event) {
         renderizarTrechos(trechosAtualizados || []);
     } catch (error) {
         console.error(error);
+    } finally {
+        setSubmitLoading(formTrecho, false);
     }
 }
 
